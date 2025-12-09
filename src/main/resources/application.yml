@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: knowledge-ai
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/devknowledge
+    username: dev
+    password: dev
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      model: llama3.2
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO

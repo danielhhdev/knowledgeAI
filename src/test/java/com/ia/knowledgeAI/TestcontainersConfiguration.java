@@ -1,4 +1,4 @@
-package com.ia.knowledgeAI;
+package com.ia.knowledgeai;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
@@ -27,5 +27,4 @@ class TestcontainersConfiguration {
 	PostgreSQLContainer<?> postgresContainer() {
 		return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
 	}
-
 }

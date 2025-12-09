@@ -1,11 +1,7 @@
-package com.ia.knowledgeAI;
+package com.ia.knowledgeai;
 
-import org.springframework.boot.SpringApplication;
-
+/**
+ * Legacy placeholder retained; no executable content.
+ */
 public class TestKnowledgeAiApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.from(KnowledgeAiApplication::main).with(TestcontainersConfiguration.class).run(args);
-	}
-
 }

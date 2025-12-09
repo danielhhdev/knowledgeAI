@@ -1,4 +1,4 @@
-package com.ia.knowledgeAI;
+package com.ia.knowledgeai;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,5 +9,4 @@ public class KnowledgeAiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(KnowledgeAiApplication.class, args);
 	}
-
 }
