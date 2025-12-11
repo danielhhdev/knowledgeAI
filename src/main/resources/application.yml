@@ -29,6 +29,6 @@ logging:
     org.springframework: INFO
 
 ingest:
-  chunk-size: 800
-  chunk-overlap: 200
+  chunk-size: 256
+  chunk-overlap: 32
   max-text-length: 20000000

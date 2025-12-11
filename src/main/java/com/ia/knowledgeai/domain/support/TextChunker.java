@@ -1,32 +1,26 @@
 package com.ia.knowledgeai.domain.support;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.ai.document.Document;
+import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.stereotype.Component;
 
 /**
- * Simple character-based chunker with overlap.
+ * Token-based chunker with overlap using Spring AI TokenTextSplitter.
  */
 @Component
 public class TextChunker {
 
 	public List<String> chunk(String text, int chunkSize, int overlap) {
-		List<String> chunks = new ArrayList<>();
 		if (text == null || text.isBlank()) {
-			return chunks;
+			return List.of();
 		}
-		int start = 0;
-		int length = text.length();
-		int effectiveOverlap = Math.max(0, Math.min(overlap, chunkSize));
-		while (start < length) {
-			int end = Math.min(start + chunkSize, length);
-			chunks.add(text.substring(start, end));
-			if (end == length) {
-				break;
-			}
-			start = end - effectiveOverlap;
-		}
-		return chunks;
+		int size = Math.max(1, chunkSize);
+		int effectiveOverlap = Math.max(0, Math.min(overlap, size));
+		// chunkSize, minChunkSize, maxChunkSize, overlap, keepSeparator
+		TokenTextSplitter splitter = new TokenTextSplitter(size, size, size, effectiveOverlap, false);
+		List<Document> docs = splitter.split(new Document(text));
+		return docs.stream().map(Document::getText).toList();
 	}
 }
