@@ -4,20 +4,21 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:postgresql://localhost:5432/devknowledge
+    url: jdbc:postgresql://localhost:5432/knowledge
     username: dev
     password: dev
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   ai:
     ollama:
       base-url: http://localhost:11434
-      model: llama3.2
+      embedding:
+        model: nomic-embed-text
 
 server:
   port: 8080
@@ -26,3 +27,8 @@ logging:
   level:
     root: INFO
     org.springframework: INFO
+
+ingest:
+  chunk-size: 256
+  chunk-overlap: 32
+  max-text-length: 20000000
