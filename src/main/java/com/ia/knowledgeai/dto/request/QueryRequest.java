@@ -21,5 +21,6 @@ public record QueryRequest(
 		@Size(max = 100, message = "Source too long")
 		String source,
 		List<@Size(max = 50, message = "Tag too long") String> tags,
-		UUID documentId) {
+		UUID documentId,
+		Boolean stream) {
 }

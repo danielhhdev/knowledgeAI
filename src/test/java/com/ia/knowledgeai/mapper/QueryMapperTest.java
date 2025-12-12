@@ -9,6 +9,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.document.Document;
 
+import com.ia.knowledgeai.dto.response.QueryAnswerResponse;
 import com.ia.knowledgeai.domain.QueryResult;
 
 class QueryMapperTest {
@@ -49,5 +50,30 @@ class QueryMapperTest {
 		assertThat(response.results()).hasSize(1);
 		assertThat(response.results().get(0).documentId()).isEqualTo(docId);
 		assertThat(response.results().get(0).snippet()).isEqualTo("snippet");
+	}
+
+	@Test
+	void shouldMapGenerativeResultToAnswerResponse() {
+		UUID docId = UUID.randomUUID();
+		Document document = new Document(
+				"chunk content",
+				Map.of(
+						"documentId", docId.toString(),
+						"title", "Sample",
+						"chunkIndex", 1,
+						"source", "manual",
+						"tags", List.of("a", "b"),
+						"score", 0.8));
+
+		QueryResult generative = queryMapper.toGenerativeResult(List.of(document), "answer text", 12L, 20, 10);
+
+		QueryAnswerResponse response = queryMapper.toAnswerResponse(generative);
+
+		assertThat(response.answer()).isEqualTo("answer text");
+		assertThat(response.sources()).hasSize(1);
+		assertThat(response.sources().get(0).documentId()).isEqualTo(docId);
+		assertThat(response.contextUsed()).hasSize(1);
+		assertThat(response.promptTokens()).isEqualTo(20);
+		assertThat(response.completionTokens()).isEqualTo(10);
 	}
 }

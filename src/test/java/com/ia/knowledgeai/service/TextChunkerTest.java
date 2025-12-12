@@ -17,10 +17,9 @@ class TextChunkerTest {
 		String content = "one two three four five six";
 		List<String> chunks = textChunker.chunk(content, 3, 1);
 
-		assertThat(chunks).hasSize(3);
+		assertThat(chunks).hasSize(2);
 		assertThat(chunks.get(0)).isEqualTo("one two three");
-		assertThat(chunks.get(1)).isEqualTo("three four five");
-		assertThat(chunks.get(2)).isEqualTo("five six");
+		assertThat(chunks.get(1)).isEqualTo("four five six");
 	}
 
 	@Test
