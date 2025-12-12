@@ -1,4 +1,17 @@
 package com.ia.knowledgeai.dto.response;
 
-public record QueryResponse(String answer) {
+import java.util.List;
+import java.util.UUID;
+
+public record QueryResponse(List<QueryResultItem> results) {
+
+	public record QueryResultItem(
+			UUID documentId,
+			String title,
+			int chunkIndex,
+			String snippet,
+			double score,
+			String source,
+			List<String> tags) {
+	}
 }

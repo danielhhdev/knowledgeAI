@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.client.RestClient;
 
 @Configuration
-@EnableConfigurationProperties(IngestProperties.class)
+@EnableConfigurationProperties({ IngestProperties.class, QueryProperties.class })
 public class SpringAIConfig {
 
 	@Bean
